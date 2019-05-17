@@ -28,6 +28,11 @@ python3 image_downloader.py /path/to/url_links.txt /path/to/images/
 #### NOTE:
 trailing '/' is required
 
+To run unit test, use the following:
+
+```
+python3 unit_test_cases.py
+```
 Remark About Error Handling 
 -----
 There are more than two error/edge case scenerios but two of them are implemented in this code because of time limitations.
