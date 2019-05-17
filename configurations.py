@@ -1,1 +1,2 @@
-min_image_size = 16000000 #bytes
+min_image_size = 160 #bytes
+min_line_length = 5

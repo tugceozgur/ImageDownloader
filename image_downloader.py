@@ -7,20 +7,30 @@ def logging(log_message):
     with open("logs.txt", "a+") as log:
         log.write("\n" + str(datetime.datetime.now()) + " " + log_message + "\n")
 
+def download_image(image_url,line_number):
+    response = requests.get(image_url)
+    #get format of image file (jpg, png ..etc)
+    image_format = response.headers['Content-Type'].split("/")[1]
+    image_name = str(line_number+1)+ "." +image_format
+    image_path ="images/" + image_name
+    image = open(image_path,"wb")
+    image.write(response.content)
+    image_size = os.path.getsize(image_path)
+    image.close()
+    assert image_size > conf.min_image_size, ("Image size is too small at " 
+                                                + str(line_number) + " \n\tURL is " + line)
+    return image_path
+
+
 with open("url_links.txt", "r") as urls:
     data = urls.read().splitlines()
     for line_number,line in enumerate(data):
         try:
-            assert len(line) > 5, "Image URL is too short"
-            image_name = os.path.basename(line)
-            image = open("images/" + image_name, "wb")
-            image.write(requests.get(line).content)
-            image_size = os.path.getsize("images/" + image_name)
-            assert image_size > conf.min_image_size, ("Image size is too small at " 
-                                                      + str(line_number) + " \n\tURL is " + line)
+            assert len(line) > conf.min_line_length, "Image URL is too short" 
+            download_image(line,line_number)
         except AssertionError as err_msg:
             logging(str(err_msg) + " at line " + str(line_number))
         except Exception as generic_err:
             logging(str(generic_err))
-    image.close()  
+      
 
