@@ -3,6 +3,8 @@ Image Downloader
 
 Python Script for 'downloading' images from given plaintext file to the local hard disk!
 
+The code expects a text file that contains image urls in its each line and downloads these images to images folder. 
+
 Install requirements
 -----
 Make sure you have python3 and pip3 installed.
@@ -13,9 +15,19 @@ pip3 install -r requirements.txt
 ```
 Usage
 -----
+execute the ``image_downloader.py`` using python3 with path to text file containing the image urls as an argument. Images file will be created inside of ``./images/``
+
 ```
-python3 image_downloader.py /path/to/url_links.txt"
+python3 image_downloader.py /path/to/url_links.txt
 ```
+In case if you want images to be created in a certain path add an additional argument
+
+```
+python3 image_downloader.py /path/to/url_links.txt /path/to/images/
+```
+#### NOTE:
+trailing '/' is required
+
 Remark About Error Handling 
 -----
 There are more than two error/edge case scenerios but two of them are implemented in this code because of time limitations.
