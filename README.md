@@ -13,6 +13,10 @@ To install required python packages
 ```
 pip3 install -r requirements.txt
 ```
+clone the repository 
+```
+git clone git@github.com:tugceozgur/ImageDownloader.git
+```
 Usage
 -----
 execute the ``image_downloader.py`` using python3 with path to text file containing the image urls as an argument. Images file will be created inside of ``./images/``
