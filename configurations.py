@@ -1,0 +1,1 @@
+min_image_size = 16000000 #bytes
