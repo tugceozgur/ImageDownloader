@@ -33,4 +33,7 @@ with open("url_links.txt", "r") as urls:
         except Exception as generic_err:
             logging(str(generic_err))
       
-
+if __name__ == '__main__':
+    directory = "images/"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
