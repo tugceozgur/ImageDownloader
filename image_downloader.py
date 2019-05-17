@@ -25,6 +25,10 @@ def download_image(image_url,line_number):
       
 if __name__ == '__main__':
     directory = "images/"
+    if len(sys.argv) < 2: 
+        print("please specify url plaintext file path: python3 image_downloader.py /path/to/url_links.txt")
+        exit()
+        
     if not os.path.exists(directory):
         os.makedirs(directory)
     #takes plaintext file as argument
