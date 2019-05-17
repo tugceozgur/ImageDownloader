@@ -3,11 +3,12 @@ import unittest
 import os
 
 class TestImageMethods(unittest.TestCase):
-    
+    # saves the downloaded image to /tmp/images/ path.
     def setUp(self):
         self.image_path = "/tmp/images/"
         os.system("mkdir -p " + self.image_path)
-
+        
+    #example image url is provided for testing whether image downloaded.
     def test_image_download(self):
         self.urls = ["https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"]
         for i, url in enumerate(self.urls):
