@@ -8,13 +8,12 @@ def logging(log_message):
     with open("logs.txt", "a+") as log:
         log.write("\n" + str(datetime.datetime.now()) + " " + log_message + "\n")
 
-def download_image(image_url,line_number):
+def download_image(image_url,line_number,download_location):
     response = requests.get(image_url)
     #get format of image file (jpg, png ..etc)
     image_format = response.headers['Content-Type'].split("/")[1]
     image_name = str(line_number+1)+ "." +image_format
-    image_path ="images/" + image_name
-
+    image_path = download_location + image_name
     with open(image_path,"wb") as img:
         img.write(response.content)
 
@@ -24,13 +23,15 @@ def download_image(image_url,line_number):
     return image_path
       
 if __name__ == '__main__':
-    directory = "images/"
-    if len(sys.argv) < 2: 
+    if len(sys.argv) >= 2:
+        download_folder = sys.argv[2]
+    else:
+        download_folder = "images/"
         print("please specify url plaintext file path: python3 image_downloader.py /path/to/url_links.txt")
         exit()
         
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    if not os.path.exists(download_folder):
+        os.system("mkdir -p " + download_folder)
     #takes plaintext file as argument
     with open(sys.argv[1], "r") as urls:
         data = urls.read().splitlines()
@@ -39,7 +40,7 @@ if __name__ == '__main__':
             try:
 
                 assert len(line) > conf.min_line_length, "Image URL is too short" 
-                download_image(line,line_number)
+                download_image(line,line_number,download_folder)
 
             except AssertionError as err_msg:
                 logging(str(err_msg) + " at line " + str(line_number))
