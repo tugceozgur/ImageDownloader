@@ -23,10 +23,11 @@ def download_image(image_url,line_number,download_location):
     return image_path
       
 if __name__ == '__main__':
-    if len(sys.argv) >= 2:
-        download_folder = sys.argv[2]
-    else:
+    if len(sys.argv) >= 3:
+        download_folder = sys.argv[3]
+    elif len(sys.argv) == 2:
         download_folder = "images/"
+    else:
         print("please specify url plaintext file path: python3 image_downloader.py /path/to/url_links.txt")
         exit()
         
